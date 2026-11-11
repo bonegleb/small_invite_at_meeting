@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#1e3c72">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Приглашение 🍂</title>
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow-x: hidden;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(160deg, #1e3c72 0%, #2a5298 50%, #1e3c72 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+            position: relative;
+            touch-action: manipulation;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 32px 24px;
+            text-align: center;
+            color: white;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 32px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cardIn 0.8s ease-out forwards;
+        }
+        
+        @keyframes cardIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .emoji-top {
+            font-size: 2.5em;
+            margin-bottom: 12px;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        h1 {
+            font-size: 1.6em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+        
+        .subtitle {
+            font-size: 0.95em;
+            opacity: 0.75;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        
+        .divider {
+            width: 40px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.4);
+            margin: 0 auto 24px;
+            border-radius: 2px;
+        }
+        
+        .details {
+            text-align: left;
+            margin: 0 auto 24px;
+            max-width: 320px;
+        }
+        
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 14px;
+            font-size: 1em;
+            line-height: 1.5;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .detail-row:nth-child(1) { animation-delay: 0.3s; }
+        .detail-row:nth-child(2) { animation-delay: 0.5s; }
+        .detail-row:nth-child(3) { animation-delay: 0.7s; }
+        .detail-row:nth-child(4) { animation-delay: 0.9s; }
+        .detail-row:nth-child(5) { animation-delay: 1.1s; }
+        
+        .detail-icon {
+            font-size: 1.3em;
+            margin-right: 12px;
+            flex-shrink: 0;
+            min-width: 28px;
+            text-align: center;
+        }
+        
+        .detail-text {
+            padding-top: 2px;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .button {
+            display: block;
+            width: 100%;
+            padding: 16px 24px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1e3c72;
+            text-decoration: none;
+            border-radius: 16px;
+            font-size: 1.05em;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            opacity: 0;
+            animation: fadeIn 0.6s ease-out 1.4s forwards;
+            -webkit-appearance: none;
+            touch-action: manipulation;
+        }
+        
+        .button:active {
+            transform: scale(0.97);
+            background: white;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        .leaf {
+            position: fixed;
+            font-size: 1.5em;
+            pointer-events: none;
+            animation: fall linear infinite;
+            opacity: 0.5;
+            will-change: transform;
+            z-index: 1;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+        
+        @media (max-height: 640px) {
+            .card {
+                padding: 24px 16px;
+            }
+            h1 {
+                font-size: 1.4em;
+            }
+            .emoji-top {
+                font-size: 2em;
+            }
+        }
+        
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+            .card {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <span class="emoji-top">🍂</span>
+            <h1>Приглашение на свидание</h1>
+            <p class="subtitle">Маленький вечер для уставших бусинок</p>
+            <div class="divider"></div>
+            
+            <div class="details">
+                <div class="detail-row">
+                    <span class="detail-icon">📅</span>
+                    <div class="detail-text">
+                        <span class="detail-label">Когда</span>
+                        Суббота, 17:00
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-icon">📍</span>
+                    <div class="detail-text">
+                        <span class="detail-label">Где</span>
+                        метро Баррикадная, центр зала
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-icon">✨</span>
+                    <div class="detail-text">
+                        <span class="detail-label">С меня</span>
+                        Атмосфера и приятная прогулка
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-icon">🧣</span>
+                    <div class="detail-text">
+                        <span class="detail-label">С тебя</span>
+                        Тёплая одежда по погоде и хорошее настроение
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-icon">🌙</span>
+                    <div class="detail-text">
+                        <span class="detail-label">В программе</span>
+                        Спокойный вайб нашего вечера
+                    </div>
+                </div>
+            </div>
+            
+            <button class="button" onclick="handleAgree()">Согласна ✨</button>
+        </div>
+    </div>
+
+    <script>
+        const leaves = ['🍂', '🍁', '✨', '⭐'];
+        const isMobile = window.innerWidth < 768;
+        const leafCount = isMobile ? 10 : 15;
+        
+        for (let i = 0; i < leafCount; i++) {
+            const leaf = document.createElement('div');
+            leaf.className = 'leaf';
+            leaf.textContent = leaves[Math.floor(Math.random() * leaves.length)];
+            leaf.style.left = Math.random() * 100 + '%';
+            leaf.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            leaf.style.animationDelay = Math.random() * 5 + 's';
+            leaf.style.fontSize = (Math.random() * 0.8 + 1) + 'em';
+            document.body.appendChild(leaf);
+        }
+        
+        function handleAgree() {
+            const button = document.querySelector('.button');
+            button.textContent = '🥰 Жду тебя!';
+            button.style.background = 'rgba(255, 255, 255, 1)';
+            
+            if (navigator.vibrate) {
+                navigator.vibrate(50);
+            }
+            
+            createConfetti();
+        }
+        
+        function createConfetti() {
+            const emojis = ['✨', '🍂', '🥰', '💫', '⭐'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-20px';
+                    confetti.style.fontSize = '1.5em';
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.zIndex = '100';
+                    confetti.style.transition = 'all 2s ease-out';
+                    document.body.appendChild(confetti);
+                    
+                    requestAnimationFrame(() => {
+                        confetti.style.top = '110vh';
+                        confetti.style.transform = `rotate(${Math.random() * 720}deg)`;
+                        confetti.style.opacity = '0';
+                    });
+                    
+                    setTimeout(() => confetti.remove(), 2000);
+                }, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
